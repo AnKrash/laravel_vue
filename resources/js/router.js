@@ -1,18 +1,27 @@
 import Vue from "vue";
-import router from "./router"
-import Index from "./components/Index";
-require('./bootstrap');
+import VueRouter from "vue-router";
+Vue.use(VueRouter)
+import PostComponent from "./components/PostComponent";
+import TagComponent from "./components/TagComponent";
 
-const app = new Vue({
-    el: '#app',
 
-    components: {
-        Index
-    },
+export default new VueRouter({
+    mode: 'history',
 
-    router
-
+    routes:[
+        {
+            path: '/posts',
+            component:PostComponent
+        },
+        {
+            path: '/tags',
+            component:TagComponent
+        }
+    ]
 })
+
+
+
 
 
 // window.Vue = require('vue').default;
