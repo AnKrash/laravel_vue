@@ -15,6 +15,6 @@ public function __invoke(UpdateRequest $request, Person $person)
 {
     $data=$request->validated();
     $person->update($data);
-    return $person;
+    return response([]);
 }
 }
