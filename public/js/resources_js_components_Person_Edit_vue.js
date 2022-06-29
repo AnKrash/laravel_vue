@@ -31,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Edit",
   data: function data() {
@@ -165,7 +166,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "w-25" }, [
-      _c("div", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "mb-3 mt-3" }, [
         _c("input", {
           directives: [
             {
@@ -189,7 +190,7 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "mb-3 mt-3" }, [
         _c("input", {
           directives: [
             {
@@ -213,7 +214,7 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "mb-3 mt-3" }, [
         _c("input", {
           directives: [
             {
@@ -237,7 +238,7 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mb-3" }, [
+      _c("div", { staticClass: "mb-3 mt-3" }, [
         _c("input", {
           staticClass: "btn btn-primary",
           attrs: {

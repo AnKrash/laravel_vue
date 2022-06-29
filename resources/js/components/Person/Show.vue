@@ -1,5 +1,5 @@
 <template>
-    <div v-if="person" >
+    <div v-if="person">
         <div> Name: {{ person.name }}</div>
         <div> Age: {{ person.age }}</div>
         <div> Job: {{ person.job }}</div>
@@ -17,7 +17,7 @@ export default {
 
         this.getPerson()
     },
-    methods:  {
+    methods: {
         getPerson() {
             axios.get(`/api/people/${this.$route.params.id}`)
                 .then(res => {
@@ -25,7 +25,7 @@ export default {
                     this.person = res.data.data
                 })
         }
-}
+    }
 }
 </script>
 

@@ -5376,8 +5376,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Index"
+  name: "Index",
+  data: function data() {
+    return {
+      token: null
+    };
+  },
+  mounted: function mounted() {
+    this.getData();
+    this.getToken();
+  },
+  updated: function updated() {
+    this.getToken();
+  },
+  methods: {
+    getToken: function getToken() {
+      this.token = localStorage.getItem('x_xsrf_token');
+    },
+    getData: function getData() {
+      axios.get('api/get').then(function (res) {
+        console.log(res);
+      });
+    },
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/logout').then(function (res) {
+        localStorage.removeItem('x_xsrf_token');
+
+        _this.$router.push({
+          name: 'user.login'
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5405,30 +5442,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
     Index: _components_Index__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
-}); // window.Vue = require('vue').default;
-//
-// /**
-//  * The following block of code may be used to automatically register your
-//  * Vue components. It will recursively scan this directory for the Vue
-//  * components and automatically register them with their "basename".
-//  *
-//  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-//  */
-//
-// // const files = require.context('./', true, /\.vue$/i)
-// // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-//
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-//
-// const app = new Vue({
-//     el: '#app',
-// });
+});
 
 /***/ }),
 
@@ -5436,7 +5450,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
@@ -5452,19 +5470,20 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+window.axios.defaults.withCredentials = true;
+window.axios.interceptors.response.use({}, function (error) {
+  if (error.response.status === 401 || error.response.status === 419) {
+    var token = localStorage.getItem('x_xsrf_token');
+
+    if (token) {
+      localStorage.removeItem('x_xsrf_token');
+    }
+
+    _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+      name: 'user.login'
+    });
+  }
+});
 
 /***/ }),
 
@@ -5484,7 +5503,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
     path: '/people',
@@ -5510,31 +5529,48 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
       return __webpack_require__.e(/*! import() */ "resources_js_components_Person_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Person/Show */ "./resources/js/components/Person/Show.vue"));
     },
     name: 'person.show'
+  }, {
+    path: '/user/login',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_User_Login_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Login */ "./resources/js/components/User/Login.vue"));
+    },
+    name: 'user.login'
+  }, {
+    path: '/user/registration',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_User_Registration_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Registration */ "./resources/js/components/User/Registration.vue"));
+    },
+    name: 'user.registration'
+  }, {
+    path: '/user/personal',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_User_Personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Personal */ "./resources/js/components/User/Personal.vue"));
+    },
+    name: 'user.personal'
   }]
-})); // window.Vue = require('vue').default;
-//
-// /**
-//  * The following block of code may be used to automatically register your
-//  * Vue components. It will recursively scan this directory for the Vue
-//  * components and automatically register them with their "basename".
-//  *
-//  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-//  */
-//
-// // const files = require.context('./', true, /\.vue$/i)
-// // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-//
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//
-// /**
-//  * Next, we will create a fresh Vue application instance and attach it to
-//  * the page. Then, you may begin adding components to this application
-//  * or customize the JavaScript scaffolding to fit your unique needs.
-//  */
-//
-// const app = new Vue({
-//     el: '#app',
-// });
+});
+router.beforeEach(function (to, from, next) {
+  var token = localStorage.getItem('x_xsrf_token');
+
+  if (!token) {
+    if (to.name === 'user.login' || to.name === 'user.registration') {
+      return next();
+    } else {
+      return next({
+        name: 'user.login'
+      });
+    }
+  }
+
+  if (to.name === 'user.login' || to.name === 'user.registration' && token) {
+    return next({
+      name: 'user.personal'
+    });
+  }
+
+  next();
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
 
@@ -28074,14 +28110,53 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "mt-3" },
     [
-      _c("router-link", { attrs: { to: { name: "person.index" } } }, [
-        _vm._v("People"),
-      ]),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "person.index" } } }, [
+            _vm._v("People"),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "person.create" } } }, [
-        _vm._v("Add"),
-      ]),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "person.create" } } }, [
+            _vm._v("Add"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.login" } } }, [
+            _vm._v("Login"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.registration" } } }, [
+            _vm._v("Registration"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "user.personal" } } }, [
+            _vm._v("Personal"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.token
+        ? _c(
+            "a",
+            {
+              attrs: { href: "#" },
+              on: {
+                click: function ($event) {
+                  $event.preventDefault()
+                  return _vm.logout.apply(null, arguments)
+                },
+              },
+            },
+            [_vm._v("Logout")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("router-view"),
     ],
@@ -43514,7 +43589,7 @@ Vue.compile = compileToFunctions;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Person_Index_vue":1,"resources_js_components_Person_Create_vue":1,"resources_js_components_Person_Edit_vue":1,"resources_js_components_Person_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Person_Index_vue":1,"resources_js_components_Person_Create_vue":1,"resources_js_components_Person_Edit_vue":1,"resources_js_components_Person_Show_vue":1,"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_User_Personal_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
