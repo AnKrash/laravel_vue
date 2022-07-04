@@ -29,3 +29,11 @@ Route::group(['namespace' => 'Person', 'prefix' => 'people'], function () {
     Route::patch('/{person}', '\App\Http\Controllers\Person\UpdateController');
     Route::delete('/{person}', '\App\Http\Controllers\Person\DeleteController');
 });
+
+Route::group(['namespace'=>'Images' ,'prefix'=>'images'],function (){
+    Route::post('/','\App\Http\Controllers\Post\StoreController');
+    Route::get('/','\App\Http\Controllers\Post\IndexController');
+    Route::post('/store_images','\App\Http\Controllers\Post\StoreImageController');
+});
+
+

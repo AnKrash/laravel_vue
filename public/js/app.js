@@ -5380,6 +5380,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   data: function data() {
@@ -5399,8 +5400,7 @@ __webpack_require__.r(__webpack_exports__);
       this.token = localStorage.getItem('x_xsrf_token');
     },
     getData: function getData() {
-      axios.get('api/get').then(function (res) {
-        console.log(res);
+      axios.get('api/get').then(function (res) {// console.log(res);
       });
     },
     logout: function logout() {
@@ -5547,6 +5547,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Personal */ "./resources/js/components/User/Personal.vue"));
     },
     name: 'user.personal'
+  }, {
+    path: '/images',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Images_index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Images/index */ "./resources/js/components/Images/index.vue"));
+    },
+    name: 'images.index'
   }]
 });
 router.beforeEach(function (to, from, next) {
@@ -28158,6 +28164,12 @@ var render = function () {
           )
         : _vm._e(),
       _vm._v(" "),
+      _vm.token
+        ? _c("router-link", { attrs: { to: { name: "images.index" } } }, [
+            _vm._v("Images"),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("router-view"),
     ],
     1
@@ -43559,6 +43571,18 @@ Vue.compile = compileToFunctions;
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -43589,7 +43613,7 @@ Vue.compile = compileToFunctions;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Person_Index_vue":1,"resources_js_components_Person_Create_vue":1,"resources_js_components_Person_Edit_vue":1,"resources_js_components_Person_Show_vue":1,"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_User_Personal_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Person_Index_vue":1,"resources_js_components_Person_Create_vue":1,"resources_js_components_Person_Edit_vue":1,"resources_js_components_Person_Show_vue":1,"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_User_Personal_vue":1,"resources_js_components_Images_index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
@@ -43781,6 +43805,11 @@ Vue.compile = compileToFunctions;
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

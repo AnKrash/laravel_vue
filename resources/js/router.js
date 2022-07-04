@@ -42,6 +42,11 @@ const router = new VueRouter({
             component: () => import('./components/User/Personal'),
             name: 'user.personal'
         },
+        {
+            path: '/images',
+            component: () => import('./components/Images/index'),
+            name: 'images.index'
+        },
 
 
     ]

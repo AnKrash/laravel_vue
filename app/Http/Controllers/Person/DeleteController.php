@@ -13,6 +13,8 @@ class DeleteController extends Controller
 
 public function __invoke( Person $person)
 {
+//    dd($person);
+    var_dump($person);
     $person->delete();
     return response([]);
 }
